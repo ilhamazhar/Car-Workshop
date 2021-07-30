@@ -17,11 +17,13 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'service' => 'required|unique:services,service'
+            'service' => 'required|unique:services,service',
+            'price' => 'required|numeric'
         ]);
 
-        $service = Service::create([
+        Service::create([
             'service' => request('service'),
+            'price' => request('price'),
         ]);
 
         return response()->json(['message' => 'The service created successfully']);
@@ -36,10 +38,12 @@ class ServiceController extends Controller
     {
         $request->validate([
             'service' => 'required|unique:services,service,' . $service->id,
+            'price' => 'required|numeric'
         ]);
         
         $service->update([
             'service' => request('service'),
+            'price' => request('price'),
         ]);
 
         return response()->json(['message' => 'The service updated successfully']);
