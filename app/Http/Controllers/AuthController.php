@@ -15,6 +15,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:4',
+            'role_id' => 'required',
         ]);
 
         // Register a user
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
+            'role_id' => request('role_id'),
         ]);
 
         // Return message after user created 
